@@ -1,28 +1,67 @@
-// Functionality for project sharing
-function setupShareButton(buttonId, title, text, url) {
-  const button = document.getElementById(buttonId);
-  if (button) {
-    button.addEventListener('click', function () {
-      if (navigator.share) {
-        navigator.share({
-          title: title,
-          text: text,
-          url: url
-        })
-        .then(() => console.log('Shared successfully'))
-        .catch(error => console.log('Error sharing:', error));
-      } else {
-        navigator.clipboard.writeText(url).then(() => {
-          alert("Link copied to clipboard!");
-        }).catch(err => {
-          alert("Failed to copy text:", err);
-        });
-      }
-    });
-  }
+// Profile Image Slider
+const profileImages = document.querySelectorAll('.profile-image img');
+let currentIndex = 0;
+
+function showNextImage() {
+  profileImages.forEach((img, index) => {
+    if (index === currentIndex) {
+      img.classList.add('active');
+    } else {
+      img.classList.remove('active');
+    }
+  });
+  currentIndex = (currentIndex + 1) % profileImages.length;
 }
 
-// Share buttons setup
-setupShareButton('Object_det_shareBtn', 'Obstacle Detection Project', 'Real-time obstacle detection project for quadruped robots.', 'https://www.linkedin.com/feed/');
-setupShareButton('Sign_language_shareBtn', 'Amharic Sign Language Project', 'Transcription of Amharic sign language to text.', 'https://drive.google.com/file/d/1To9SS-R6rlLZhiKyp4O8G_JRwqjGpu9p/view?usp=sharing');
-setupShareButton('Rental_shareBtn', 'Online Rental System', 'Manage rental properties and transactions efficiently.', 'https://github.com/Alki45/rental/');
+setInterval(showNextImage, 5000);
+
+// Share Button for Object Detection
+document.getElementById("Object_det_shareBtn").addEventListener("click", function() {
+  if (navigator.share) {
+    navigator.share({
+      title: "Obstacle Detection Project",
+      text: "Check out this real-time obstacle detection project for quadruped robots!",
+      url: "Object_det_shareBtn"
+    })
+    .then(() => console.log('Successfully shared'))
+    .catch((error) => console.log('Error sharing:', error));
+  } else {
+    alert("Sorry, your browser does not support the Web Share API.");
+  }
+});
+
+// Share Button for Sign Language
+const signLanguageShareBtn = document.getElementById('Sign_language_shareBtn');
+const signLanguageLink = document.querySelector('.Sign-language a');
+
+signLanguageShareBtn.addEventListener('click', function() {
+  const linkUrl = signLanguageLink.getAttribute('href');
+  const sharedText = `Check out this project on Amharic sign language transcription: ${linkUrl}`;
+
+  if (navigator.share) {
+    navigator.share({
+      title: 'Amharic Sign Language Project',
+      text: sharedText,
+      url: linkUrl
+    })
+    .then(() => console.log('Successfully shared'))
+    .catch((error) => console.log('Error sharing:', error));
+  } else {
+    alert("Sorry, your browser does not support the Web Share API.");
+  }
+});
+
+// Share Button for Rental System
+document.getElementById("Rental_shareBtn").addEventListener("click", function() {
+  if (navigator.share) {
+    navigator.share({
+      title: "Online Rental System",
+      text: "Check out this platform for managing rental properties and transactions.",
+      url: "https://github.com/Alki45/rental/"
+    })
+    .then(() => console.log('Successfully shared'))
+    .catch((error) => console.log('Error sharing:', error));
+  } else {
+    alert("Sorry, your browser does not support the Web Share API.");
+  }
+});
