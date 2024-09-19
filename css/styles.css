@@ -15,28 +15,56 @@ body {
 header {
   background-color: #4CAF50;
   color: white;
-  padding: 20px 0;
-  text-align: center;
+  padding: 10px 20px;
   width: 100%; /* Ensure header spans full width */
 }
 
-/* Navigation */
-nav ul {
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: left;
+  max-width: 1200px; /* Optional: Set a max-width for larger screens */
+  margin: 10px auto; /* Center the container */
+  padding: 20px 20px; /* Optional: Add some padding */
+  box-sizing: border-box; /* Include padding in width calculation */
+}
+
+.logo {
+  margin: 0;
+  font-size: 1.5rem;
+  align-items: right;
+}
+
+.navbar ul {
   list-style-type: none;
   padding: 0;
-  margin: 0; /* Remove default margin */
+  margin: 0;
+  display: flex; /* Display list items in a row */
 }
 
-nav ul li {
-  display: inline;
-  margin: 0 15px;
+.navbar ul li {
+  margin: 0 10px;
 }
 
-nav ul li a {
+.navbar ul li a {
   color: white;
   text-decoration: none;
   font-weight: bold;
+  font-size: 1rem;
 }
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .navbar ul {
+    flex-direction: column; /* Stack links vertically on small screens */
+    align-items: flex-start; /* Align links to the left */
+  }
+
+  .navbar ul li {
+    margin: 10px 0; /* Add space between items */
+  }
+}
+
 
 /* Main Content Area */
 main {
@@ -264,6 +292,8 @@ footer {
 .contact-links li {
   display: inline;
   margin: 0 10px;
+
+
 }
 
 .contact-links a {
@@ -272,6 +302,7 @@ footer {
 }
 
 .contact-links a:hover {
+  
   text-decoration: underline; 
 }
 
